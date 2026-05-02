@@ -521,12 +521,15 @@ export default function App() {
   );
 
   const getBackgroundImage = () => {
+    const base = import.meta.env.BASE_URL;
     switch(activeView) {
-      case 'Stocks': return "url('/stocks_bg.png')";
-      case 'ETF': return "url('/etf_bg.png')";
-      case 'Mutual Fund': return "url('/mutual_fund_bg.png')";
-      case 'EPF': return "url('/trading_bg.png')"; // Can change to epf_bg.png if available
-      default: return "url('/trading_bg.png')";
+      case 'Stocks': return `url('${base}stocks_bg.png')`;
+      case 'ETF': return `url('${base}etf_bg.png')`;
+      case 'Mutual Fund': return `url('${base}mutual_fund_bg.png')`;
+      case 'EPF': return `url('${base}epf_bg.png')`;
+      case 'PPF': return `url('${base}ppf_bg.png')`;
+      case 'Dashboard': return `url('${base}dashboard_bg.png')`;
+      default: return `url('${base}trading_bg.png')`;
     }
   };
 
