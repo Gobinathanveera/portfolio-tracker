@@ -154,6 +154,18 @@ export default function App() {
     setTimeout(() => setToast(null), 3000);
   };
 
+  const convertToYahooTicker = (googleTicker) => {
+    if (!googleTicker) return null;
+    const parts = googleTicker.split(':');
+    if (parts.length === 2) {
+      const exchange = parts[0].toUpperCase();
+      const symbol = parts[1].toUpperCase();
+      if (exchange === 'NSE') return `${symbol}.NS`;
+      if (exchange === 'BSE') return `${symbol}.BO`;
+    }
+    return googleTicker;
+  };
+
   const fetchLivePrices = async () => {
     setIsSyncing(true);
     const todayStr = new Date().toISOString().split('T')[0];
@@ -162,7 +174,7 @@ export default function App() {
     data.forEach(item => {
       if (item.type !== 'Mutual Fund') {
         item.holdings.forEach(h => {
-          if (h.ticker) allTickers.push(h.ticker);
+          if (h.ticker && !allTickers.includes(h.ticker)) allTickers.push(h.ticker);
         });
       }
     });
@@ -174,10 +186,25 @@ export default function App() {
     }
 
     try {
-      const apiUrl = `http://${window.location.hostname}:3001/api/live-prices?tickers=${allTickers.join(',')}`;
-      const response = await fetch(apiUrl);
-      if (!response.ok) throw new Error('Network error');
-      const livePrices = await response.json();
+      const livePrices = {};
+      
+      // Fetch prices concurrently using a free CORS proxy directly from Yahoo Finance
+      await Promise.all(allTickers.map(async (googleTicker) => {
+        const yfTicker = convertToYahooTicker(googleTicker);
+        if (!yfTicker) return;
+        
+        try {
+          const url = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${yfTicker}`)}`;
+          const response = await fetch(url);
+          if (response.ok) {
+            const result = await response.json();
+            const price = result?.chart?.result?.[0]?.meta?.regularMarketPrice;
+            if (price) livePrices[googleTicker] = price;
+          }
+        } catch (e) {
+          console.warn(`Failed to fetch price for ${googleTicker}`);
+        }
+      }));
 
       let updatedCount = 0;
       
@@ -213,12 +240,12 @@ export default function App() {
       });
 
       if (updatedCount > 0) {
-        showToast(`Successfully synced ${updatedCount} live prices!`, 'success');
+        showToast(`Successfully synced ${updatedCount} live prices directly!`, 'success');
       } else {
         showToast(`All prices are already up to date!`, 'success');
       }
     } catch (err) {
-      showToast('Failed to fetch live prices. Ensure backend is running.', 'error');
+      showToast('Failed to fetch live prices.', 'error');
       console.error(err);
     } finally {
       setIsSyncing(false);
