@@ -22,38 +22,41 @@ const genId = () => Math.random().toString(36).substr(2, 9);
 const defaultData = [
   { 
     type: 'Stocks', 
-    history: [{ date: getThirtyDaysAgo(), value: 5851.99 }, { date: new Date().toISOString().split('T')[0], value: 5775.80 }],
+    history: [],
     holdings: [
-      { id: genId(), name: 'South Indian Bank', ticker: 'NSE:SOUTHBANK', units: 70, avgBuyPrice: 34.87, cmp: 33.50 },
-      { id: genId(), name: 'ITC', ticker: 'NSE:ITC', units: 3, avgBuyPrice: 345.00, cmp: 350.00 },
-      { id: genId(), name: 'HDFCPVTBAN', ticker: 'NSE:HDFCBANK', units: 25, avgBuyPrice: 27.39, cmp: 26.00 },
-      { id: genId(), name: 'IRFC', ticker: 'NSE:IRFC', units: 5, avgBuyPrice: 184.10, cmp: 180.00 },
-      { id: genId(), name: 'BEL', ticker: 'NSE:BEL', units: 2, avgBuyPrice: 385.11, cmp: 390.00 }
+      { id: genId(), name: 'South Indian Bank', ticker: 'NSE:SOUTHBANK', units: 50, avgBuyPrice: 38.99, cmp: 39.57 },
+      { id: genId(), name: 'ITC', ticker: 'NSE:ITC', units: 3, avgBuyPrice: 345.00, cmp: 315.20 },
+      { id: genId(), name: 'IRFC', ticker: 'NSE:IRFC', units: 3, avgBuyPrice: 208.80, cmp: 104.69 },
+      { id: genId(), name: 'Bharat Electronics Ltd', ticker: 'NSE:BEL', units: 2, avgBuyPrice: 385.11, cmp: 431.80 },
+      { id: genId(), name: 'Indian Railway Finance Corporation Ltd', ticker: 'NSE:IRFC', units: 2, avgBuyPrice: 147.06, cmp: 104.69 },
+      { id: genId(), name: 'South Indian Bank Ltd', ticker: 'NSE:SOUTHBANK', units: 20, avgBuyPrice: 24.60, cmp: 39.57 }
     ]
   },
   { 
     type: 'ETF', 
-    history: [{ date: getThirtyDaysAgo(), value: 2564.60 }, { date: new Date().toISOString().split('T')[0], value: 2355.85 }],
+    history: [],
     holdings: [
-      { id: genId(), name: 'BHARATAT022', ticker: 'NSE:ICICIB22', units: 4, avgBuyPrice: 714.28, cmp: 700.00 },
-      { id: genId(), name: 'NETFIT', ticker: 'NSE:NETFIT', units: 10, avgBuyPrice: 26.58, cmp: 25.00 },
-      { id: genId(), name: 'MON100', ticker: 'NSE:MON100', units: 5, avgBuyPrice: 141.28, cmp: 135.00 },
-      { id: genId(), name: 'GOLDBEES', ticker: 'NSE:GOLDBEES', units: 5, avgBuyPrice: 57.88, cmp: 60.00 },
-      { id: genId(), name: 'JUNIORBEES', ticker: 'NSE:JUNIORBEES', units: 1, avgBuyPrice: 562.90, cmp: 550.00 }
+      { id: genId(), name: 'HDFC NIFTY Private Bank ETF', ticker: 'NSE:HDFCPVTBAN', units: 25, avgBuyPrice: 27.39, cmp: 26.93 },
+      { id: genId(), name: 'Groww Nifty 50 ETF', ticker: 'NSE:GROWWNIFTY', units: 60, avgBuyPrice: 10.09, cmp: 9.70 },
+      { id: genId(), name: 'Tata Silver ETF', ticker: 'NSE:TATSILV', units: 25, avgBuyPrice: 29.46, cmp: 23.12 },
+      { id: genId(), name: 'Tata Gold ETF', ticker: 'NSE:TATAGOLD', units: 20, avgBuyPrice: 13.60, cmp: 14.48 },
+      { id: genId(), name: 'Nippon India ETF Gold Bees', ticker: 'NSE:GOLDBEES', units: 5, avgBuyPrice: 130.70, cmp: 123.33 },
+      { id: genId(), name: 'Tata Gold Exchange Traded Fund', ticker: 'NSE:TATAGOLD', units: 20, avgBuyPrice: 14.86, cmp: 14.48 }
     ]
   },
   { 
     type: 'Mutual Fund', 
-    history: [{ date: getThirtyDaysAgo(), value: 15300.00 }, { date: new Date().toISOString().split('T')[0], value: 15657.00 }],
+    history: [],
     holdings: [
-      { id: genId(), name: 'Motilal Oswal Nifty India Defense', units: 1, avgBuyPrice: 4000.00, cmp: 4150.00 },
-      { id: genId(), name: 'Navi Nifty 50 Index Fund', units: 1, avgBuyPrice: 3400.00, cmp: 3450.00 },
-      { id: genId(), name: 'Kotak Energy Opportunities Fund', units: 1, avgBuyPrice: 1200.00, cmp: 1220.00 },
-      { id: genId(), name: 'Bandhan Small Cap Fund', units: 1, avgBuyPrice: 1200.00, cmp: 1250.00 },
-      { id: genId(), name: 'HDFC Mid Cap Fund', units: 1, avgBuyPrice: 1400.00, cmp: 1420.00 },
-      { id: genId(), name: 'HDFC Silver ETF FoF', units: 1, avgBuyPrice: 600.00, cmp: 610.00 },
-      { id: genId(), name: 'Motilal Oswal Midcap Fund', units: 1, avgBuyPrice: 500.00, cmp: 520.00 },
-      { id: genId(), name: 'Axis Liquid Fund', units: 1, avgBuyPrice: 2000.00, cmp: 2010.00 }
+      { id: genId(), name: 'Motilal Oswal Nifty India Defence Index Fund Direct Growth', units: 1, avgBuyPrice: 4000.00, cmp: 4456.00 },
+      { id: genId(), name: 'Navi Nifty 50 Index Fund Direct Growth', units: 1, avgBuyPrice: 3400.00, cmp: 3268.00 },
+      { id: genId(), name: 'HDFC Mid Cap Fund Direct Growth', units: 1, avgBuyPrice: 1400.00, cmp: 1388.00 },
+      { id: genId(), name: 'Kotak Energy Opportunities Fund Direct Growth', units: 1, avgBuyPrice: 1200.00, cmp: 1291.00 },
+      { id: genId(), name: 'Bandhan Small Cap Fund Direct Growth', units: 1, avgBuyPrice: 1200.00, cmp: 1247.00 },
+      { id: genId(), name: 'Parag parikh Flexi Cap Fund Direct Growth', units: 1, avgBuyPrice: 1000.00, cmp: 996.00 },
+      { id: genId(), name: 'HDFC Silver ETF FoF Direct Growth', units: 1, avgBuyPrice: 600.00, cmp: 530.00 },
+      { id: genId(), name: 'Motilal Oswal Midcap Fund Direct Growth', units: 1, avgBuyPrice: 500.00, cmp: 402.00 },
+      { id: genId(), name: 'Axis Liquid Fund', units: 1, avgBuyPrice: 2000.00, cmp: 2005.00 }
     ]
   },
   {
@@ -119,7 +122,7 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 
 export default function App() {
   const [data, setData] = useState(() => {
-    const saved = localStorage.getItem('myPortfolioData_v9');
+    const saved = localStorage.getItem('myPortfolioData_v10');
     if (saved) {
       try { 
         const parsed = JSON.parse(saved);
@@ -130,7 +133,7 @@ export default function App() {
   });
 
   useEffect(() => {
-    localStorage.setItem('myPortfolioData_v9', JSON.stringify(data));
+    localStorage.setItem('myPortfolioData_v10', JSON.stringify(data));
   }, [data]);
 
   const [activeView, setActiveView] = useState('Dashboard');
